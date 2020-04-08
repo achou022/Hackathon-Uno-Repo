@@ -31,6 +31,7 @@ namespace hackathon
             while(playing){
                 // game logic
                 // playing = false;
+
                 while(turn){
                     if(player.IsSkipped)
                     {
@@ -51,6 +52,10 @@ namespace hackathon
                     else if(input.ToLower() == "draw")
                     {
                         player.Draw(uno);
+                        if(uno.Cards.Count==0)
+                        {
+                            uno.Refill(board);
+                        }
                     }
                     else
                     {
@@ -71,6 +76,10 @@ namespace hackathon
                         {
                             Console.WriteLine("You forgot to say 'Uno'!");
                             player.Draw(uno);
+                            if(uno.Cards.Count==0)
+                            {
+                                uno.Refill(board);
+                            }
                         }
                     }
                     if(player.hand.Count==0){
@@ -103,6 +112,10 @@ namespace hackathon
                 }
                 if(!NPCplayed){
                     computer.Draw(uno);
+                    if(uno.Cards.Count==0)
+                    {
+                        uno.Refill(board);
+                    }
                 }
                 Console.WriteLine("Computer ended turn..");
                 turn = true;
