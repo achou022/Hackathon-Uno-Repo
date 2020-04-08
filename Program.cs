@@ -22,7 +22,7 @@ namespace hackathon
             Board board = new Board(uno.Deal());
             board.showBoard();
             // set board with one card from deck board.play(uno.Deal());
-            for(int i = 0; i < 2; i++){
+            for(int i = 0; i < 7; i++){
                 player.Draw(uno);
                 computer.Draw(uno);
             }
@@ -133,7 +133,7 @@ namespace hackathon
                         if(computer.hand.Count==1)
                         {
                             double unoMissChance = rand.NextDouble();
-                            if (unoMissChance > .5)
+                            if (unoMissChance > .05)
                             {
                                 Console.WriteLine($"{computer.Name} says 'Uno!'");
                             }
