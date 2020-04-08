@@ -77,7 +77,10 @@ class Player{
                 {
                     if(target.ReqColorInput)
                     {
-                    string color = "Blue";
+                    Random rand = new Random();
+                    //"Red", "Blue", "Green", "Yellow"
+                    string[] AvailableColors = new string[]{"Red", "Blue", "Green", "Yellow"};
+                    string color = AvailableColors[rand.Next(0,AvailableColors.Length)];
                     target.Action(targetPlayer, deck, board, color);
                     }
                     else
@@ -107,7 +110,7 @@ class Player{
             int index = 0;
             foreach (Card playerCard in hand)
             {
-                Console.WriteLine(index + ": " + playerCard.Suit + " " + playerCard.Val);
+                Console.WriteLine(index + ": " + playerCard.Suit + " " + playerCard.Val + " ------cardType:" + playerCard.FancyCardStuff);
                 index ++;
             }
             // Console.WriteLine("Which card would you like to play?");

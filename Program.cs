@@ -18,7 +18,14 @@ namespace hackathon
             // string name = Console.ReadLine();
             Player player = new Player("Stevie Unoman");
             Player computer = new Player("Computer");
-            Board board = new Board(uno.Deal());
+            Card InitialCard = uno.Deal();
+            Board board = new Board(InitialCard);
+            while (InitialCard.Suit=="Black")
+            {
+
+                InitialCard = uno.Deal();
+                board.AddToPlayPile(InitialCard);
+            }
             board.showBoard();
             // set board with one card from deck board.play(uno.Deal());
             for(int i = 0; i < 7; i++){
