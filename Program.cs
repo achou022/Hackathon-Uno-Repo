@@ -54,13 +54,13 @@ namespace hackathon
                     }
                     else
                     {
-                        var playerAction = player.PlayCard(input, board);
+                        var playerAction = player.PlayCard(input, uno, board, computer);
                         if (playerAction == null)
                         {
                             while (playerAction == null)
                             {
                                 input = Console.ReadLine();
-                                playerAction = player.PlayCard(input, board);
+                                playerAction = player.PlayCard(input, uno, board, computer);
                             }
                         }
                     }
@@ -91,7 +91,7 @@ namespace hackathon
                 foreach (Card card in computer.hand)
                 {
                     if(card.Suit==board.LastCardPlayed.Suit || card.Val==board.LastCardPlayed.Val){
-                        computer.NPCPlayCard(card, board);
+                        computer.NPCPlayCard(card, uno, board, player);
                         NPCplayed=true;
                         if(computer.hand.Count==0){
                             playing = false;

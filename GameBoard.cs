@@ -8,7 +8,7 @@ namespace GameBoard
     {
         public List<Card> CardsPlayed;
         public Card LastCardPlayed;
-        public string ActiveSuit;
+        public string ActiveSuit{get;set;}
         public Board(Card card){
             CardsPlayed = new List<Card>(){card};
             LastCardPlayed = card;
@@ -33,7 +33,7 @@ namespace GameBoard
 
         public void showBoard(){
             //Console.WriteLine(LastCardPlayed.StringVal);
-            Console.WriteLine(LastCardPlayed.Suit + " " + LastCardPlayed.Val);
+            Console.WriteLine(ActiveSuit + " " + LastCardPlayed.Val);
         }
     }
 }

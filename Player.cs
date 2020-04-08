@@ -22,7 +22,7 @@ class Player{
             return drew;
         }
 
-        public Card PlayCard(string strIndx, Board board){
+        public Card PlayCard(string strIndx, Deck deck, Board board, Player targetPlayer){
             int indx;
    
             // convert strIndx to int and pass to indx
@@ -39,6 +39,20 @@ class Player{
                 if(board.AddToPlayPile(target))
                 {
                     hand.Remove(target);
+                    if(target.HasAction)
+                    {
+                        if(target.ReqColorInput)
+                        {
+                        Console.WriteLine("pick your color");
+                        string color = Console.ReadLine();
+                        target.Action(targetPlayer, deck, board, color);
+                        }
+                        else
+                        {
+                        target.Action(targetPlayer, deck, board);
+                        }
+                        
+                    }
                     return target;
                 }
                 else
@@ -53,12 +67,25 @@ class Player{
                 return null;
             } 
         }
-        public Card NPCPlayCard(Card toPlay, Board board){
+        public Card NPCPlayCard(Card toPlay, Deck deck, Board board, Player targetPlayer){
             Card target = toPlay;
             Console.WriteLine($"{Name} played a card {target.Suit} {target.Val}");
             if(board.AddToPlayPile(target))
             {
                 hand.Remove(target);
+                 if(target.HasAction)
+                {
+                    if(target.ReqColorInput)
+                    {
+                    string color = "Blue";
+                    target.Action(targetPlayer, deck, board, color);
+                    }
+                    else
+                    {
+                    target.Action(targetPlayer, deck, board);
+                    }
+                    
+                }
                 return target;
             }
             else

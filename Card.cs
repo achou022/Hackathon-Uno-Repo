@@ -7,6 +7,7 @@ namespace Decks{
         public string Suit;
         public int Val;
         public bool HasAction;
+        public bool ReqColorInput;
         public Card(string suit, int val){
             Suit=suit;
             Val=val;
@@ -16,6 +17,10 @@ namespace Decks{
             {
                 HasAction=true;
             }
+            if(val>12)
+            {
+                ReqColorInput=true;
+            }
         }
         //108 cards total
         //0(1 of each 4 colors) - 4
@@ -24,7 +29,7 @@ namespace Decks{
         //choose color(4 total), choose and take 4 (4 total) - 8
         //val 0-9 -> 0-9
         //val 10, 11, 12, 13, 14 -> skip, take2, reverse, chooseColor, chooseTake4
-        public void Action(Player target, Deck deck, Board board, string color)
+        public void Action(Player target, Deck deck, Board board)
         {
             if(Val==10)//skip
             {
@@ -42,10 +47,14 @@ namespace Decks{
                 //leaving this commented out until more players are added
                 //GameBoard.ChangeDirection()
             }
+        }
+        public void Action(Player target, Deck deck, Board board, string color)
+        {
             if(Val==13)//choseColor
             {
                 if(color =="Red" || color== "Blue" || color=="Green" ||color=="Yellow")
                 {
+                    System.Console.WriteLine("setting active suit to {0}",color);
                     board.ActiveSuit = color;
                 }
 
