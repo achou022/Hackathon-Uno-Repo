@@ -84,7 +84,7 @@ namespace hackathon
                             }
                             else
                             {
-                                playerAction = player.PlayCard(input, board);
+                                playerAction = player.PlayCard(input, uno, board, computer);
                             }
                         }
 
