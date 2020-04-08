@@ -12,6 +12,7 @@ namespace GameBoard
         public Board(Card card){
             CardsPlayed = new List<Card>(){card};
             LastCardPlayed = card;
+            ActiveSuit = card.Suit;
             Console.WriteLine("Board has been initialized!");
         }
         public bool AddToPlayPile(Card card)
