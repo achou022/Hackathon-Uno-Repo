@@ -48,6 +48,15 @@ namespace Decks{
             Console.WriteLine("reseting the deck...");
             Cards=setDeck();
         }
+        public void Refill(Board board){
+            Console.WriteLine("Deck is empty! Refilling from the discard pile.");
+            Cards = board.CardsPlayed;
+            Card lastCard = board.LastCardPlayed;
+            List<Card> newDiscardPile = new List<Card>();
+            newDiscardPile.Add(lastCard);
+            board.CardsPlayed = newDiscardPile;
+            Shuffle();
+        }
 
         public void Shuffle(){
             List<Card> shuffled = new List<Card>();
