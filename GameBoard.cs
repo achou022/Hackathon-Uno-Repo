@@ -8,6 +8,7 @@ namespace GameBoard
     {
         public List<Card> CardsPlayed;
         public Card LastCardPlayed;
+        public string ActiveSuit;
         public Board(Card card){
             CardsPlayed = new List<Card>(){card};
             LastCardPlayed = card;
@@ -16,9 +17,10 @@ namespace GameBoard
         public bool AddToPlayPile(Card card)
         {
             // Validate the play
-            if(card.Suit == LastCardPlayed.Suit || card.Val == LastCardPlayed.Val)
+            if(card.Suit == ActiveSuit || card.Val == LastCardPlayed.Val || card.Val>=13)
             {
                 LastCardPlayed = card;
+                ActiveSuit = card.Suit;
                 CardsPlayed.Add(card);
                 return true;
             }

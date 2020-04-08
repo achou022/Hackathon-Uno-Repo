@@ -7,9 +7,11 @@ namespace Decks{
 class Player{
         public string Name;
         public List<Card> hand;
+        public bool IsSkipped;
         public Player(string name){
             Name = name;
             hand = new List<Card>();
+            IsSkipped=false;
             Console.WriteLine($"{Name} has been initialized!");
         }
 
