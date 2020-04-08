@@ -23,6 +23,16 @@ namespace Decks{
                         deck.Add(new Card(suite, i));
                     }
                 }
+                //--------Special Cards----------------
+                // for (int i=10; i<13; i++)
+                // {
+                //     deck.Add(new Card(suite, i));
+                //     deck.Add(new Card(suite, i));
+                // }
+                // for (int i=13; i<15; i++)
+                // {
+                //     deck.Add(new Card("Black", i));
+                // }
             }
             return deck;
         }
