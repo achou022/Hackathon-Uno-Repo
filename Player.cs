@@ -23,23 +23,34 @@ class Player{
         }
 
         public Card PlayCard(string strIndx, Board board){
-            int indx = 0;
+            int indx;
+   
             // convert strIndx to int and pass to indx
-            Console.WriteLine($"Player played a card...");
-            if(indx>hand.Count || indx<0){
-                Console.WriteLine("Please pick a card within your hand size.");
-                return null;
-            }
-            Card target = hand[indx];
-            if(board.AddToPlayPile(target))
+            bool inputIsNumber = Int32.TryParse(strIndx, out indx);
+            if (inputIsNumber)
             {
-                hand.Remove(target);
-                return target;
+                Console.WriteLine($"Player played a card...");
+                if(indx>hand.Count || indx<0)
+                {
+                    Console.WriteLine("Please pick a card within your hand size.");
+                    return null;
+                }
+                Card target = hand[indx];
+                if(board.AddToPlayPile(target))
+                {
+                    hand.Remove(target);
+                    return target;
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
+                Console.WriteLine("Please enter a valid number within your hand size.");
                 return null;
-            }
+            } 
         }
 
         public void ShowHand()
