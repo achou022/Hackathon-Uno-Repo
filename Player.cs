@@ -29,13 +29,13 @@ class Player{
             bool inputIsNumber = Int32.TryParse(strIndx, out indx);
             if (inputIsNumber)
             {
-                Console.WriteLine($"Player played a card...");
                 if(indx>hand.Count || indx<0)
                 {
                     Console.WriteLine("Please pick a card within your hand size.");
                     return null;
                 }
                 Card target = hand[indx];
+                Console.WriteLine($"{Name} played a card {target.Suit} {target.Val}");
                 if(board.AddToPlayPile(target))
                 {
                     hand.Remove(target);
@@ -43,17 +43,19 @@ class Player{
                 }
                 else
                 {
+                    Console.WriteLine("That isn't a valid play, please pick another card.");
                     return null;
                 }
             }
             else
             {
-                Console.WriteLine("That isn't a valid play, please pick another card.");
+                Console.WriteLine("That isn't a card index, please pick from one of the numbers listed next to your cards!");
                 return null;
             } 
         }
         public Card NPCPlayCard(Card toPlay, Board board){
             Card target = toPlay;
+            Console.WriteLine($"{Name} played a card {target.Suit} {target.Val}");
             if(board.AddToPlayPile(target))
             {
                 hand.Remove(target);
@@ -74,7 +76,7 @@ class Player{
 
         public void ShowHand()
         {
-            Console.WriteLine("Your hand contains the following: ");
+            Console.WriteLine($"{Name}'s hand contains the following: ");
             int index = 0;
             foreach (Card playerCard in hand)
             {

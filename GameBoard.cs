@@ -32,7 +32,8 @@ namespace GameBoard
         }
 
         public void showBoard(){
-            Console.WriteLine(LastCardPlayed.StringVal);
+            //Console.WriteLine(LastCardPlayed.StringVal);
+            Console.WriteLine(LastCardPlayed.Suit + " " + LastCardPlayed.Val);
         }
     }
 }

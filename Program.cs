@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using Decks;
 using GameBoard;
 
@@ -14,8 +15,8 @@ namespace hackathon
             // printDeck(uno);
             // setting up game
             Console.Write("What's your name player...? ");
-            string name = Console.ReadLine();
-            Player player = new Player(name);
+            // string name = Console.ReadLine();
+            Player player = new Player("Stevie Unoman");
             Player computer = new Player("Computer");
             Board board = new Board(uno.Deal());
             board.showBoard();
@@ -53,29 +54,40 @@ namespace hackathon
                     }
                     else
                     {
-                        while(player.PlayCard(input, board) == null)
+                        var playerAction = player.PlayCard(input, board);
+                        if (playerAction == null)
                         {
-                            input = Console.ReadLine();
+                            while (playerAction == null)
+                            {
+                                input = Console.ReadLine();
+                                playerAction = player.PlayCard(input, board);
+                            }
                         }
-                        player.PlayCard(input, board);
                     }
                     if(player.hand.Count==1)
                     {
                         string callout = Console.ReadLine();
-                        if(callout.ToLower() != "uno")
+                        if(callout.ToLower() != "uno" || callout.ToLower() != "uno!")
                         {
-                            Console.WriteLine("You forgot to say 'Uno!'");
+                            Console.WriteLine("You forgot to say 'Uno'!");
                             player.Draw(uno);
                         }
                     }
                     if(player.hand.Count==0){
                         Console.WriteLine("You Won!!!");
                         playing = false;
+                        break;
                     }
                     turn = false;
                 }
                 // computer logic
                 bool NPCplayed = false;
+                Console.WriteLine("Printing Computer's Hand, that's cheating!");
+                computer.ShowHand();
+
+                
+
+
                 foreach (Card card in computer.hand)
                 {
                     if(card.Suit==board.LastCardPlayed.Suit || card.Val==board.LastCardPlayed.Val){
@@ -85,6 +97,7 @@ namespace hackathon
                             playing = false;
                             Console.WriteLine("Computer has Won, you lost!");
                         }
+                        break;
                     }
                 }
                 if(!NPCplayed){
