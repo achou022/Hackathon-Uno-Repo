@@ -38,8 +38,28 @@ class Player{
             }
             else
             {
+                Console.WriteLine("That isn't a valid play, please pick another card.");
                 return null;
             }
+        }
+        public Card NPCPlayCard(Card toPlay, Board board){
+            Card target = toPlay;
+            if(board.AddToPlayPile(target))
+            {
+                hand.Remove(target);
+                return target;
+            }
+            else
+            {
+                Console.WriteLine("That isn't a valid play, please pick another card.");
+                return null;
+            }
+        }
+
+        public void SkipPlayer()
+        {
+            Console.WriteLine($"{Name} has been skipped!");
+            IsSkipped = false;
         }
 
         public void ShowHand()
