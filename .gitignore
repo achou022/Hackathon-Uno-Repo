@@ -1,0 +1,6 @@
+# Debugging stuff
+/Debug
+/.vscode
+# Stuff relating to a specific computer
+/obj
+/bin
