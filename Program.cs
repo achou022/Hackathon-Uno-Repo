@@ -85,13 +85,14 @@ namespace hackathon
                 Console.WriteLine("Printing Computer's Hand, that's cheating!");
                 computer.ShowHand();
 
-                
-
 
                 foreach (Card card in computer.hand)
                 {
                     if(card.Suit==board.LastCardPlayed.Suit || card.Val==board.LastCardPlayed.Val){
                         computer.NPCPlayCard(card, board);
+                        if(card.HasAction){
+                            card.Action(player, uno, board, board.ActiveSuit);
+                        }
                         NPCplayed=true;
                         if(computer.hand.Count==0){
                             playing = false;
