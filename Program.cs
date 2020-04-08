@@ -32,9 +32,14 @@ namespace hackathon
                 // playing = false;
                 while(turn){
                     if(player.IsSkipped){turn=false;}
+                    player.ShowHand();
                     Console.Write("What card would you like to play? ");
                     string cardIndx = Console.ReadLine();
                     // player action
+                    if(cardIndx.ToLower() == "quit")
+                    {
+                        playing = false;
+                    }
                     if(player.hand.Count==1){
                         string win = Console.ReadLine();
                         if(win != "Uno"){
@@ -67,7 +72,7 @@ namespace hackathon
                 Console.WriteLine("Computer ended turn..");
                 turn = true;
             }
-            Console.WriteLine("game over...");
+            Console.WriteLine("Game Over");
         }
         public static void printDeck(Deck deck){
             foreach (Card card in deck.Cards)
