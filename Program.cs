@@ -15,17 +15,19 @@ namespace hackathon
             // printDeck(uno);
             // setting up game
             Console.Write("What's your name player...? ");
-            // string name = Console.ReadLine();
-            Player player = new Player("Stevie Unoman");
-            Player computer = new Player("Computer");
-            Card InitialCard = uno.Deal();
-            Board board = new Board(InitialCard);
-            while (InitialCard.Suit=="Black")
-            {
+            string name = Console.ReadLine();
+            Random rand = new Random();
+            Player player = new Player(name);
+            Player computer = new Player("Stevie Unoman");
+            Board board = new Board(uno.Deal());
 
-                InitialCard = uno.Deal();
-                board.AddToPlayPile(InitialCard);
-            }
+            // while (InitialCard.Suit=="Black")
+            // {
+
+            //     InitialCard = uno.Deal();
+            //     board.AddToPlayPile(InitialCard);
+            // }
+            
             board.showBoard();
             // set board with one card from deck board.play(uno.Deal());
             for(int i = 0; i < 7; i++){
@@ -49,33 +51,53 @@ namespace hackathon
                     board.showBoard();
                     player.ShowHand();
                     Console.WriteLine("What would you like to do?");
-                    string input = Console.ReadLine();
+                    // string input = Console.ReadLine();
 
-                    if(input.ToLower() == "quit")
-                    {
-                        Console.WriteLine("Goodbye!");
-                        playing = false;
-                    }
-                    else if(input.ToLower() == "draw")
-                    {
-                        player.Draw(uno);
-                        if(uno.Cards.Count==0)
+                    // if(input.ToLower() == "quit")
+                    // {
+                    //     Console.WriteLine("Goodbye!");
+                    //     playing = false;
+                    //     break;
+                    // }
+                    // else if(input.ToLower() == "draw")
+                    // {
+                    //     player.Draw(uno);
+                    //     if(uno.Cards.Count==0)
+                    //     {
+                    //         uno.Refill(board);
+                    //     }
+                    // }
+                    // else
+                    // {
+                    Object playerAction = null;
+                    // if (playerAction == null)
+                    // {
+                        while (playerAction == null)
                         {
-                            uno.Refill(board);
-                        }
-                    }
-                    else
-                    {
-                        var playerAction = player.PlayCard(input, uno, board, computer);
-                        if (playerAction == null)
-                        {
-                            while (playerAction == null)
+                            string input = Console.ReadLine();
+                            if(input.ToLower() == "quit")
                             {
-                                input = Console.ReadLine();
+                                Console.WriteLine("Goodbye!");
+                                playerAction = true;
+                                playing = false;
+                                break;
+                            }
+                            if(input.ToLower() == "draw")
+                            {
+                                playerAction = player.Draw(uno);
+                                if(uno.Cards.Count==0)
+                                {
+                                    uno.Refill(board);
+                                }
+                            }
+                            else
+                            {
                                 playerAction = player.PlayCard(input, uno, board, computer);
                             }
                         }
-                    }
+
+                    
+
                     if(player.hand.Count==1)
                     {
                         string callout = Console.ReadLine();
@@ -96,8 +118,14 @@ namespace hackathon
                     }
                     turn = false;
                 }
+
+                if(!playing)
+                {
+                    break;
+                }
                 // computer logic
                 bool NPCplayed = false;
+                bool NPCMissedUno = false;
                 Console.WriteLine("Printing Computer's Hand, that's cheating!");
                 computer.ShowHand();
 
@@ -110,7 +138,20 @@ namespace hackathon
                             card.Action(player, uno, board, board.ActiveSuit);
                         }
                         NPCplayed=true;
-                        if(computer.hand.Count==0){
+                        if(computer.hand.Count==1)
+                        {
+                            double unoMissChance = rand.NextDouble();
+                            if (unoMissChance > .05)
+                            {
+                                Console.WriteLine($"{computer.Name} says 'Uno!'");
+                            }
+                            else
+                            {
+                                NPCMissedUno = true;
+                            }
+                        }
+                        if(computer.hand.Count==0)
+                        {
                             playing = false;
                             Console.WriteLine("Computer has Won, you lost!");
                         }
@@ -125,6 +166,16 @@ namespace hackathon
                     }
                 }
                 Console.WriteLine("Computer ended turn..");
+                if(NPCMissedUno)
+                {
+                    Console.WriteLine($"{computer.Name} forgot to say Uno!");
+                    computer.Draw(uno);
+                    if(uno.Cards.Count==0)
+                    {
+                        uno.Refill(board);
+                    }
+                    NPCMissedUno = false;
+                }
                 turn = true;
             }
             Console.WriteLine("Game Over");
