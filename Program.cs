@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Decks;
+using GameBoard;
 
 namespace hackathon
 {
@@ -8,15 +9,16 @@ namespace hackathon
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             Deck uno = new Deck();
             uno.Shuffle();
-            printDeck(uno);
+            // printDeck(uno);
             // setting up game
             Console.Write("What's your name player...? ");
             string name = Console.ReadLine();
             Player player = new Player(name);
             Player computer = new Player("Computer");
+            Board board = new Board(uno.Deal());
+            board.showBoard();
             // set board with one card from deck board.play(uno.Deal());
             for(int i = 0; i < 7; i++){
                 player.Draw(uno);
@@ -61,6 +63,7 @@ namespace hackathon
                 // if(!played){
                 //     computer.Draw(uno);
                 // }
+                Console.WriteLine("Computer ended turn..");
                 turn = true;
             }
             Console.WriteLine("game over...");
