@@ -16,7 +16,7 @@ class Player{
         }
 
         public Card Draw(Deck deck){
-            Console.WriteLine("Player drawing card...");
+            Console.WriteLine($"{Name} draws a card...");
             Card drew = deck.Deal();
             hand.Add(drew);
             return drew;
