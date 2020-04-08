@@ -29,6 +29,7 @@ namespace hackathon
                 // game logic
                 // playing = false;
                 while(turn){
+                    if(player.IsSkipped){turn=false;}
                     Console.Write("What card would you like to play? ");
                     string cardIndx = Console.ReadLine();
                     // player action

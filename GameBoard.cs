@@ -11,7 +11,7 @@ namespace GameBoard
         public bool AddToPlayPile(Card card)
         {
             // Validate the play
-            if(card.Suit == LastCardPlayed.Suit || card.Val == LastCardPlayed.Val)
+            if(card.Suit == LastCardPlayed.Suit || card.Val == LastCardPlayed.Val || card.Val>=13)
             {
                 LastCardPlayed = card;
                 CardsPlayed.Add(card);
