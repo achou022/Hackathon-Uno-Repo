@@ -24,7 +24,6 @@ class Player{
 
         public Card PlayCard(string strIndx, Deck deck, Board board, Player targetPlayer){
             int indx;
-   
             // convert strIndx to int and pass to indx
             bool inputIsNumber = Int32.TryParse(strIndx, out indx);
             if (inputIsNumber)
@@ -35,7 +34,7 @@ class Player{
                     return null;
                 }
                 Card target = hand[indx];
-                Console.WriteLine($"{Name} played a card {target.Suit} {target.Val}");
+                Console.WriteLine($"*****{Name} played {target.Suit} {target.Val}*****");
                 if(board.AddToPlayPile(target))
                 {
                     hand.Remove(target);
@@ -73,7 +72,7 @@ class Player{
             if(board.AddToPlayPile(target))
             {
                 hand.Remove(target);
-                 if(target.HasAction)
+                if(target.HasAction)
                 {
                     if(target.ReqColorInput)
                     {
@@ -106,14 +105,14 @@ class Player{
 
         public void ShowHand()
         {
-            Console.WriteLine($"{Name}'s hand contains the following: ");
+            Console.WriteLine($"====={Name}'s hand=====");
             int index = 0;
             foreach (Card playerCard in hand)
             {
                 Console.WriteLine(index + ": " + playerCard.Suit + " " + playerCard.Val + " ------cardType:" + playerCard.FancyCardStuff);
                 index ++;
             }
-            // Console.WriteLine("Which card would you like to play?");
+            Console.WriteLine($"=====Card Count {hand.Count} =====");
         }
     }
 }

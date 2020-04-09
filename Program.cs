@@ -10,11 +10,12 @@ namespace hackathon
     {
         static void Main(string[] args)
         {
+            // initialize deck prints welcome to uno
             Deck uno = new Deck();
+            // shuffling deck logs setting up your game...
             uno.Shuffle();
-            // printDeck(uno);
             // setting up game
-            Console.Write("What's your name player...? ");
+            Console.Write("What's your name? ");
             string name = Console.ReadLine();
             Random rand = new Random();
             Player player = new Player(name);
@@ -23,7 +24,6 @@ namespace hackathon
 
             // while (InitialCard.Suit=="Black")
             // {
-
             //     InitialCard = uno.Deal();
             //     board.AddToPlayPile(InitialCard);
             // }
@@ -34,6 +34,7 @@ namespace hackathon
                 player.Draw(uno);
                 computer.Draw(uno);
             }
+            Console.WriteLine("=====Let the Game Begin!=====");
             // game loop
             bool playing = true;
             bool turn = true;
@@ -47,7 +48,6 @@ namespace hackathon
                         player.SkipPlayer();
                         turn=false;
                     }
-                    Console.WriteLine("The last card played was: ");
                     board.showBoard();
                     player.ShowHand();
                     Console.WriteLine("What would you like to do?");
@@ -125,9 +125,10 @@ namespace hackathon
                 }
                 // computer logic
                 bool NPCplayed = false;
-                bool NPCMissedUno = false;
-                Console.WriteLine("Printing Computer's Hand, that's cheating!");
-                computer.ShowHand();
+                bool NPCMissedUno = false; 
+                // Console.WriteLine("Printing Computer's Hand, that's cheating!");
+                // computer.ShowHand();
+                Console.WriteLine($"{computer.Name} has {computer.hand.Count} left in hand...");
 
 
                 foreach (Card card in computer.hand)
@@ -153,7 +154,7 @@ namespace hackathon
                         if(computer.hand.Count==0)
                         {
                             playing = false;
-                            Console.WriteLine("Computer has Won, you lost!");
+                            Console.WriteLine($"{computer.Name} has Won, you lost!");
                         }
                         break;
                     }
@@ -165,7 +166,7 @@ namespace hackathon
                         uno.Refill(board);
                     }
                 }
-                Console.WriteLine("Computer ended turn..");
+                Console.WriteLine($"{computer.Name} ended turn..");
                 if(NPCMissedUno)
                 {
                     Console.WriteLine($"{computer.Name} forgot to say Uno!");
@@ -178,7 +179,7 @@ namespace hackathon
                 }
                 turn = true;
             }
-            Console.WriteLine("Game Over");
+            Console.WriteLine("=====Game Over=====");
         }
         public static void printDeck(Deck deck){
             foreach (Card card in deck.Cards)

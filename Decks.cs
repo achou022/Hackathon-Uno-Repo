@@ -9,7 +9,9 @@ namespace Decks{
 
         public Deck(){
             Cards=setDeck();
-            Console.WriteLine("New deck has been built!");
+            Console.WriteLine("=================");
+            Console.WriteLine("=Welcome to Uno!=");
+            Console.WriteLine("=================");
         }
 
         public List<Card> setDeck(){
@@ -40,7 +42,7 @@ namespace Decks{
         public Card Deal(){
             Card target = Cards[0];
             Cards.Remove(Cards[0]);
-            Console.WriteLine("Dealing card...");
+            // Console.WriteLine("Dealing card...");
             return target;
         }
 
@@ -61,7 +63,7 @@ namespace Decks{
         public void Shuffle(){
             List<Card> shuffled = new List<Card>();
             Random rand = new Random();
-            Console.WriteLine("Shuffling.......");
+            Console.WriteLine("Setting up your game...");
             while(Cards.Count != 0){
                 int selected = rand.Next(Cards.Count);
                 shuffled.Add(Cards[selected]);

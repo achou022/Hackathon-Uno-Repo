@@ -13,7 +13,7 @@ namespace GameBoard
             CardsPlayed = new List<Card>(){card};
             LastCardPlayed = card;
             ActiveSuit = card.Suit;
-            Console.WriteLine("Board has been initialized!");
+            // Console.WriteLine("Board has been initialized!");
         }
         public bool AddToPlayPile(Card card)
         {
@@ -33,7 +33,8 @@ namespace GameBoard
 
         public void showBoard(){
             //Console.WriteLine(LastCardPlayed.StringVal);
-            Console.WriteLine(ActiveSuit + " " + LastCardPlayed.Val);
+            Console.WriteLine("=====Current Card on Board=====");
+            Console.WriteLine("====="+ActiveSuit + " " + LastCardPlayed.Val+"=====");
         }
     }
 }
